@@ -2,7 +2,7 @@ module StringCalc
   class << self
 
 	def add(*numbers)
-		numbers.flatten.join(",").split(",").map(&:to_i).sum
+		numbers.flatten.map { |x| Integer(x) rescue 0 }.sum
 	end
   end
 end

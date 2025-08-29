@@ -10,7 +10,11 @@ module StringCalc
 		else
 			delim = /,|\n/
 		end
-		str.split(delim).sum { |n| n.to_i }
+
+		nums = str.split(delim).map(&:to_i)
+		negatives = nums.select(&:negative?)
+		raise "negative numbers not allowed: #{negatives.join(',')}" if negatives.any?
+		nums.sum
 	end
 
   end

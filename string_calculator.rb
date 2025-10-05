@@ -2,19 +2,20 @@ module StringCalculator
   class << self
 
 	def add(*args)
-		str = args.flatten.join(',')
-		return 0 if str.empty?
+	  numbers = args.join(",")
+	  return 0 if numbers.empty?
 
-		if str.start_with?("//")
-			seprator, str = str[2..].split("\n", 2)
-		else
-			seprator = /,|\n/
-		end
+	  if numbers.start_with?("//")
+	    separator, numbers = numbers[2..].split("\n", 2)
+	  else
+	    separator = /,|\n/
+	  end
 
-		nums = str.split(seprator).map(&:to_i)
-		negatives = nums.select(&:negative?)
-		raise "negative numbers not allowed: #{negatives.join(',')}" if negatives.any?
-		nums.sum
+	  nums = numbers.split(separator).map(&:to_i)
+	  negatives = nums.select(&:negative?)
+	  raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
+
+	  nums.sum
 	end
 
   end
